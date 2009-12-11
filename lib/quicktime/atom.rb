@@ -11,8 +11,7 @@ module QuickTime
     def header
       return @header if @header
       @io.seek(@start)
-      length = @io.read(4).unpack('N')[0]
-      name = @io.read(4)
+      length, name = @io.read(8).unpack('Na4')
       @header = {
         :name => name,
         :data_start => @start + 8,
